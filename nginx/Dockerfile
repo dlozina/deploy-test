@@ -1,5 +1,8 @@
 FROM nginx:alpine
 
+# Add build argument for environment
+ARG ENVIRONMENT=prod
+
 # Remove default config to avoid conflicts
 RUN rm /etc/nginx/conf.d/default.conf
 
@@ -7,7 +10,9 @@ RUN rm /etc/nginx/conf.d/default.conf
 RUN apk add --no-cache bind-tools iputils
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY sites/ /etc/nginx/sites/
+
+# Copy environment-specific config and rename it
+COPY sites/deploy-test-${ENVIRONMENT}.conf /etc/nginx/sites/deploy-test.conf
 
 # Create SSL directory
 RUN mkdir -p /etc/nginx/ssl

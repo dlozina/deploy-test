@@ -2,7 +2,6 @@ version: '3'
 
 services:
   node:
-    ##todo: change to your own image
     image: ghcr.io/dlozina/deploy-test-node:latest
     environment:
       - NODE_ENV=production
@@ -11,13 +10,13 @@ services:
       - app-network
 
   nginx:
-    ##todo: change to your own image
     image: ghcr.io/dlozina/deploy-test-nginx:latest
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./.htpasswd:/etc/nginx/.htpasswd:ro
+       - ./.htpasswd:/etc/nginx/.htpasswd:ro
+       - ./ssl:/etc/nginx/ssl:ro
     restart: always
     depends_on:
       - node

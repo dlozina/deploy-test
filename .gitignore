@@ -1,8 +1,9 @@
 #node_modules
-/node_modules
+**/node_modules
+
 
 #macos
-.DS_Store
+**/.DS_Store
 
 #env
 .env

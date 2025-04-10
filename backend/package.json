@@ -1,0 +1,15 @@
+{
+  "name": "deploy-test",
+  "version": "1.0.0",
+  "description": "End to end test for the deployment - nginx and the web app ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "author": "Dino Lozina",
+  "license": "MIT"
+}

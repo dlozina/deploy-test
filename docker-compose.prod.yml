@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  node:
+    ##todo: change to your own image
+    image: ghcr.io/yourusername/deploy-test-node:latest
+    environment:
+      - NODE_ENV=production
+    restart: always
+    networks:
+      - app-network
+
+  nginx:
+    ##todo: change to your own image
+    image: ghcr.io/yourusername/deploy-test-nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./.htpasswd:/etc/nginx/.htpasswd:ro
+    restart: always
+    depends_on:
+      - node
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

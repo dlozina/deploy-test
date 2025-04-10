@@ -1,0 +1,45 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Node.js image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile.node
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/deploy-test-node:latest
+            ghcr.io/${{ github.repository_owner }}/deploy-test-node:${{ github.sha }}
+
+      - name: Build and push Nginx image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/deploy-test-nginx:latest
+            ghcr.io/${{ github.repository_owner }}/deploy-test-nginx:${{ github.sha }}

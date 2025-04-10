@@ -15,4 +15,4 @@ RUN mkdir -p /etc/nginx/ssl
 EXPOSE 80 443
 
 # Test DNS resolution before starting Nginx
-CMD ["sh", "-c", "echo 'Testing DNS resolution:' && ping -c 1 frontend || echo 'Cannot ping frontend' && ping -c 1 backend || echo 'Cannot ping backend' && nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "echo 'Testing DNS resolution:' && ping -c 1 node || echo 'Cannot ping node' && nginx -g 'daemon off;'"]

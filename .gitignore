@@ -1,0 +1,10 @@
+#node_modules
+/node_modules
+
+#macos
+.DS_Store
+
+#env
+.env
+.env.local
+

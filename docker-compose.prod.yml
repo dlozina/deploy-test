@@ -3,7 +3,7 @@ version: '3'
 services:
   node:
     ##todo: change to your own image
-    image: ghcr.io/yourusername/deploy-test-node:latest
+    image: ghcr.io/dlozina/deploy-test-node:latest
     environment:
       - NODE_ENV=production
     restart: always
@@ -12,7 +12,7 @@ services:
 
   nginx:
     ##todo: change to your own image
-    image: ghcr.io/yourusername/deploy-test-nginx:latest
+    image: ghcr.io/dlozina/deploy-test-nginx:latest
     ports:
       - "80:80"
       - "443:443"
